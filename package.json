@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/create-release"
+    "url": "git+https://github.com/actions/create-release.git"
   },
   "keywords": [
     "actions",
@@ -20,8 +20,8 @@
   "author": "GitHub",
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.4",
-    "@actions/exec": "^1.0.0",
+    "@actions/core": "^1.10.0",
+    "@actions/exec": "^1.1.0",
     "@actions/github": "^2.2.0",
     "semver": "^7.3.2",
     "minimist": ">=0.2.1",
@@ -53,5 +53,12 @@
         "statements": 80
       }
     }
+  },
+  "bugs": {
+    "url": "https://github.com/actions/create-release/issues"
+  },
+  "homepage": "https://github.com/actions/create-release#readme",
+  "directories": {
+    "test": "tests"
   }
 }
