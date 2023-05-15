@@ -23,9 +23,10 @@
     "@actions/core": "^1.10.0",
     "@actions/exec": "^1.1.0",
     "@actions/github": "^2.2.0",
-    "semver": "^7.3.2",
+    "kind-of": ">=6.0.3",
     "minimist": ">=0.2.1",
-    "kind-of": ">=6.0.3"
+    "npm": "^9.6.6",
+    "semver": "^7.3.2"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.20.4",
@@ -36,9 +37,9 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^2.7.0",
     "eslint-plugin-react": "^7.12.4",
+    "husky": "^3.0.5",
     "jest": "^24.8.0",
-    "prettier": "^1.16.4",
-    "husky": "^3.0.5"
+    "prettier": "^1.16.4"
   },
   "jest": {
     "testEnvironment": "node",
