@@ -12825,7 +12825,6 @@ const { GitHub, context } = __nccwpck_require__(4366);
 const { owner, repo } = context.repo;
 const semver = __nccwpck_require__(9928);
 const process = __nccwpck_require__(7282);
-const foo = 'bar';
 
 const octokit = new GitHub(process.env.GITHUB_TOKEN);
 const Scheme = {
