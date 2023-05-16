@@ -4,6 +4,7 @@ const { GitHub, context } = require('@actions/github');
 const { owner, repo } = context.repo;
 const semver = require('semver');
 const process = require('process');
+const foo = 'bar';
 
 const octokit = new GitHub(process.env.GITHUB_TOKEN);
 const Scheme = {
