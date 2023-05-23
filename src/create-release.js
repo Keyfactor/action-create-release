@@ -34,14 +34,14 @@ function initialTag(tag) {
   return newTag;
 }
 
-// Filter the existing tags/refs on the version
+// Filter the existing tags/refs on the version core.getInput('release_name')
 async function existingTags() {
   const { data: refs } = await octokit.git.listMatchingRefs({
     owner,
     repo,
     ref: 'tags'
   });
-  return refs.reverse();
+  return refs.filter(obj => obj.ref.includes('tags/' + core.getInput('release_name'))).reverse();
 }
 
 function semanticVersion(tag) {
@@ -157,7 +157,7 @@ async function run() {
       core.setFailed(`Unsupported version scheme: ${scheme}`);
       return;
     }
-    console.log('The current release version is ' + core.getInput('release_name'));
+    //console.log('The current release version is ' + core.getInput('release_name'));
     // Use predefined tag or calculate automatic next tag
     const tag = isNullString(tagName) ? await computeNextTag(scheme) : tagName.replace('refs/tags/', '');
 
