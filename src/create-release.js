@@ -157,6 +157,7 @@ async function run() {
       core.setFailed(`Unsupported version scheme: ${scheme}`);
       return;
     }
+    console.log('The current release version is ' + core.getInput('release_name'));
     // Use predefined tag or calculate automatic next tag
     const tag = isNullString(tagName) ? await computeNextTag(scheme) : tagName.replace('refs/tags/', '');
 
