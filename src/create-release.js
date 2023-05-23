@@ -34,6 +34,7 @@ function initialTag(tag) {
   return newTag;
 }
 
+// Filter the existing tags/refs on the version
 async function existingTags() {
   const { data: refs } = await octokit.git.listMatchingRefs({
     owner,
