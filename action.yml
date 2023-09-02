@@ -14,11 +14,9 @@ inputs:
   draft:
     description: '`true` to create a draft (unpublished) release, `false` to create a published one. Default: `false`'
     required: false
-    default: false
   prerelease:
     description: '`true` to identify the release as a prerelease. `false` to identify the release as a full release. Default: `false`'
     required: false
-    default: false
   prerelease_suffix:
     description: 'Annotate a prerelease version tag with suffix'
     required: false

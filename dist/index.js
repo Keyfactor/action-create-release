@@ -12359,6 +12359,7 @@ async function computeLastTag() {
   if (recentTags.length < 1) {
     return null;
   }
+  core.info(`computeLastTag most recentTag ref: ${recentTags[0].ref}`);
   return recentTags.shift().ref.replace('refs/tags/', '');
 }
 
