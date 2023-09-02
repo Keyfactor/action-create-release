@@ -12239,8 +12239,8 @@ exports.request = request;
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
 const core = __webpack_require__(470);
-const { GitHub, context } = __webpack_require__(469);
-
+const { context } = __webpack_require__(469);
+const { GitHub } = __webpack_require__(0);
 const { owner, repo } = context.repo;
 const semver = __webpack_require__(876);
 const process = __webpack_require__(765);
