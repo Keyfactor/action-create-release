@@ -90,3 +90,6 @@ typings/
 # Misc
 .idea/
 .DS_Store
+
+#Visual Studio
+.vs/
