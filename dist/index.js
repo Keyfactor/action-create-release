@@ -19516,12 +19516,12 @@ function wrappy (fn, cb) {
 
 const core = __nccwpck_require__(8021);
 const { context } = __nccwpck_require__(4366);
-const { GitHub } = __nccwpck_require__(2662);
+const { Octokit } = __nccwpck_require__(2662);
 const { owner, repo } = context.repo;
 const semver = __nccwpck_require__(9928);
 const process = __nccwpck_require__(7282);
 
-const octokit = new GitHub(process.env.GITHUB_TOKEN);
+const octokit = new Octokit(process.env.GITHUB_TOKEN);
 const Scheme = {
   Continuous: 'continuous',
   Semantic: 'semantic'
