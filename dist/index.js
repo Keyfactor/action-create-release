@@ -19659,7 +19659,7 @@ async function computeNextTag(scheme) {
   const semTag = semanticVersion(lastTag);
   console.log(`lastTag: ${lastTag}`)
   console.log(`semTag: ${semTag}`)
-  console.log(`scheme: ${scheme}`)
+  // console.log(`scheme: ${scheme}`)
   if (semTag == null) {
     core.setFailed(`Failed to parse tag: ${lastTag}`);
     return null;
