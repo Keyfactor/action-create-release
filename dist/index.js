@@ -19559,8 +19559,8 @@ async function existingTags() {
     repo,
     ref: 'tags'
   });
-  console.log(`existing tags = ${refs}`);
-  return refs.filter(obj => obj.ref.includes(`tags/${patchVersion}`)).reverse();
+  console.log(`existing tags = ${refs[0]}`);
+  return refs.filter(obj => obj.ref.includes(`refs/tags/${patchVersion}`)).reverse();
 }
 
 function semanticVersion(tag) {
