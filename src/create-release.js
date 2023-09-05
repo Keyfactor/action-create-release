@@ -105,6 +105,7 @@ function computeNextSemantic(semTag) {
       case Semantic.Preminor:
       case Semantic.Prepatch:
       case Semantic.Prerelease:
+        console.log(`running semver using: semtag=${semTag}, type=${type}, preName=${preName}`)
         return `${semTag.options.tagPrefix}${semver.inc(semTag, type, preName)}`;
       default:
         core.setFailed(
@@ -140,7 +141,9 @@ async function computeNextTag(scheme) {
   core.setOutput('previous_tag', lastTag);
 
   const semTag = semanticVersion(lastTag);
-
+  console.log(`lastTag: ${lastTag}`)
+  console.log(`semTag: ${semTag}`)
+  console.log(`scheme: ${scheme}`)
   if (semTag == null) {
     core.setFailed(`Failed to parse tag: ${lastTag}`);
     return null;
@@ -150,6 +153,7 @@ async function computeNextTag(scheme) {
   if (scheme === Scheme.Continuous) {
     return computeNextContinuous(semTag);
   }
+  console.log(`Run computeNextSemantic using ${semTag}`)
   return computeNextSemantic(semTag);
 }
 
@@ -157,7 +161,7 @@ async function run() {
   try {
     // Get the inputs from the workflow file: https://github.com/actions/toolkit/tree/master/packages/core#inputsoutputs
     const tagName = core.getInput('tag_name', { required: false });
-    const scheme = 'semantic' //core.getInput('tag_schema', { required: false });
+    core.getInput('tag_schema', { required: false });
     if (scheme !== Scheme.Continuous && scheme !== Scheme.Semantic) {
       core.setFailed(`Unsupported version scheme: ${scheme}`);
       return;
