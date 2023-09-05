@@ -161,7 +161,7 @@ async function run() {
   try {
     // Get the inputs from the workflow file: https://github.com/actions/toolkit/tree/master/packages/core#inputsoutputs
     const tagName = core.getInput('tag_name', { required: false });
-    core.getInput('tag_schema', { required: false });
+    const scheme = core.getInput('tag_schema', { required: false });
     if (scheme !== Scheme.Continuous && scheme !== Scheme.Semantic) {
       core.setFailed(`Unsupported version scheme: ${scheme}`);
       return;
