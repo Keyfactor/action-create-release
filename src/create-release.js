@@ -34,7 +34,7 @@ function initialTag(tag) {
   return newTag;
 }
 
-// Filter the existing tags/refs on the version core.getInput('release_name')
+// Filter the existing tags/refs on the version core.getInput('patch_version')
 async function existingTags() {
   console.log(`Getting existing tags for ${patchVersion} on ${owner}/${repo}...`);
 
@@ -44,7 +44,7 @@ async function existingTags() {
     ref: 'tags'
   });
   const filteredTags = refs.filter(obj => obj.ref.includes(`refs/tags/${patchVersion}`)).reverse();
-  console.log(`Latest filteredTag refs[0]:${filteredTags[0]}`)
+  console.log(`filteredTags most recent: ${filteredTags[0].ref}`)
   return filteredTags
 }
 
