@@ -19535,7 +19535,8 @@ const Semantic = {
   Prerelease: 'prerelease'
 };
 const prerelease = core.getInput('prerelease', { required: false }) === 'true';
-const releaseName = core.getInput('release_name') || process.env.RELEASE_NAME
+const releaseName = core.getInput('release_name') || process.env.RELEASE_NAME;
+const patchVersion = core.getInput('patch_version') || process.env.PATCH_VERSION;
 // Check string is null
 function isNullString(string) {
   return !string || string.length === 0 || string === 'null' || string === 'undefined';
