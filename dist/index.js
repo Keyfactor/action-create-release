@@ -19551,7 +19551,7 @@ function initialTag(tag) {
 
 // Filter the existing tags/refs on the version core.getInput('release_name')
 async function existingTags() {
-  console.log(`Getting existing tags on ${owner}/${repo}...`);
+  console.log(`Getting existing tags for ${patchVersion} on ${owner}/${repo}...`);
 
   const { data: refs } = await octokit.rest.git.listMatchingRefs({
     owner,
