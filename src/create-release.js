@@ -4,7 +4,6 @@ const { Octokit } = require('@octokit/rest');
 const { owner, repo } = context.repo;
 const semver = require('semver');
 const process = require('process');
-
 const octokit = new Octokit(process.env.GITHUB_TOKEN);
 const Scheme = {
   Continuous: 'continuous',
@@ -20,7 +19,7 @@ const Semantic = {
   Prerelease: 'prerelease'
 };
 const prerelease = core.getInput('prerelease', { required: false }) === 'true';
-
+const releaseName = core.getInput('release_name') || process.env.RELEASE_NAME
 // Check string is null
 function isNullString(string) {
   return !string || string.length === 0 || string === 'null' || string === 'undefined';
@@ -36,12 +35,15 @@ function initialTag(tag) {
 
 // Filter the existing tags/refs on the version core.getInput('release_name')
 async function existingTags() {
-  const { data: refs } = await octokit.git.listMatchingRefs({
+  console.log(`Getting existing tags on ${owner}/${repo}...`);
+
+  const { data: refs } = await octokit.rest.git.listMatchingRefs({
     owner,
     repo,
     ref: 'tags'
   });
-  return refs.filter(obj => obj.ref.includes('tags/' + core.getInput('release_name'))).reverse();
+  console.log(`existing tags = ${refs}`);
+  return refs.filter(obj => obj.ref.includes(`tags/${patchVersion}`)).reverse();
 }
 
 function semanticVersion(tag) {
@@ -125,6 +127,7 @@ async function computeLastTag() {
 
 async function computeNextTag(scheme) {
   const lastTag = await computeLastTag();
+
   // Handle zero-state where no tags exist for the repo
   if (!lastTag) {
     if (scheme === Scheme.Continuous) {
@@ -153,14 +156,17 @@ async function run() {
   try {
     // Get the inputs from the workflow file: https://github.com/actions/toolkit/tree/master/packages/core#inputsoutputs
     const tagName = core.getInput('tag_name', { required: false });
-    const scheme = core.getInput('tag_schema', { required: false });
+    const scheme = 'semantic' //core.getInput('tag_schema', { required: false });
     if (scheme !== Scheme.Continuous && scheme !== Scheme.Semantic) {
       core.setFailed(`Unsupported version scheme: ${scheme}`);
       return;
     }
+    console.log(`tagName = ${tagName}`);
+    console.log(`scheme = ${scheme}`);
     //console.log('The current release version is ' + core.getInput('release_name'));
     // Use predefined tag or calculate automatic next tag
     const tag = isNullString(tagName) ? await computeNextTag(scheme) : tagName.replace('refs/tags/', '');
+    console.log(`tagName = ${tag}`);
 
     const releaseName = core.getInput('release_name', { required: false });
     const release = isNullString(releaseName) ? tag : releaseName.replace('refs/tags/', '');
@@ -168,7 +174,7 @@ async function run() {
     const body = core.getInput('body', { required: false });
     const draft = core.getInput('draft', { required: false }) === 'true';
     const commitish = core.getInput('commitish', { required: false }) || context.sha;
-
+    console.log('consts from getInput set')
     // Create a release
     // API Documentation: https://developer.github.com/v3/repos/releases/#create-a-release
     // Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-create-release
