@@ -90,3 +90,5 @@ typings/
 # Misc
 .idea/
 .DS_Store
+
+.vs/
