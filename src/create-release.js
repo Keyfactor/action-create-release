@@ -91,8 +91,10 @@ function computeNextContinuous(semTag) {
 
 function computeNextSemantic(semTag) {
   try {
+    console.log(`Computing next Semantic Tag based on ${semTag}`)
     const type = core.getInput('auto_increment_type') || Semantic.Patch;
     const preName = determinePrereleaseName(semTag);
+    console.log(`preName for semTag: ${preName}`)
 
     switch (type) {
       case Semantic.Major:
@@ -115,6 +117,7 @@ function computeNextSemantic(semTag) {
 }
 
 async function computeLastTag() {
+  console.log(`Computing lastTag...`)
   const recentTags = await existingTags();
   if (recentTags.length < 1) {
     return null;
@@ -124,6 +127,7 @@ async function computeLastTag() {
 
 async function computeNextTag(scheme) {
   const lastTag = await computeLastTag();
+  console.log(`lastTag: ${lastTag}`)
   // Handle zero-state where no tags exist for the repo
   if (!lastTag) {
     if (scheme === Scheme.Continuous) {
@@ -167,7 +171,17 @@ async function run() {
     const body = core.getInput('body', { required: false });
     const draft = core.getInput('draft', { required: false }) === 'true';
     const commitish = core.getInput('commitish', { required: false }) || context.sha;
-
+    // Debug output variables
+    console.log(`
+    tagName: ${tagName}
+    scheme: ${scheme}
+    tag: ${tag}
+    releaseName: ${releaseName}
+    release: ${release}
+    body: ${body}
+    draft: ${draft}
+    commitish: ${commitish}
+    `)
     // Create a release
     // API Documentation: https://developer.github.com/v3/repos/releases/#create-a-release
     // Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-create-release
@@ -192,6 +206,12 @@ async function run() {
     core.setOutput('id', releaseId);
     core.setOutput('html_url', htmlUrl);
     core.setOutput('upload_url', uploadUrl);
+    console.log(`
+    current_tag: ${current_tag}
+    id: ${id}
+    html_url: ${html_url}
+    upload_url: ${upload_url}
+    `)
   } catch (error) {
     core.setFailed(error.message);
   }
