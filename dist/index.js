@@ -15170,7 +15170,7 @@ try {
 
 const core = __nccwpck_require__(869);
 const { context } = __nccwpck_require__(7457);
-const { Octokit } = __nccwpck_require__(2662);
+const { GitHub } = __nccwpck_require__(2662);
 
 const { owner, repo } = context.repo;
 const semver = __nccwpck_require__(3630);
