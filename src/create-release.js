@@ -6,7 +6,7 @@ const { owner, repo } = context.repo;
 const semver = require('semver');
 const process = require('process');
 
-const octokit = new GitHub(process.env.GITHUB_TOKEN);
+const octokit = new Octokit(process.env.GITHUB_TOKEN);
 const Scheme = {
   Continuous: 'continuous',
   Semantic: 'semantic'
