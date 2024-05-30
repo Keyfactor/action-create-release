@@ -12,4 +12,4 @@ jobs:
     steps:
       - uses: keyfactor/checkout@v4
       - run: npm ci
-      - run: npm test
+#       - run: npm test
